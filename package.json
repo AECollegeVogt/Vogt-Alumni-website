@@ -1,0 +1,28 @@
+{
+  "name": "aecollegevogt.github.io",
+  "version": "1.0.0",
+  "description": "Website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AECollegeVogt/aecollegevogt.github.io.git"
+  },
+  "author": "Diane Tobit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AECollegeVogt/aecollegevogt.github.io/issues"
+  },
+  "homepage": "https://github.com/AECollegeVogt/aecollegevogt.github.io#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "pg": "^7.0.0"
+  }
+}
