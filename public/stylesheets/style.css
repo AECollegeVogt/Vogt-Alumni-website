@@ -1,0 +1,11 @@
+header + div {
+  padding-top: 150px;
+}
+
+#error {
+  text-align: center;
+}
+
+#error pre {
+  text-align: left;
+}
