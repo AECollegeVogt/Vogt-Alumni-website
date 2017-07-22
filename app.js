@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var config = require('./config');
 
 var app = express();
 
@@ -41,6 +42,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000);
+app.listen(config.port, function() {
+  console.log("Listening on port " + config.port + "!");
+});
 
 module.exports = app;
