@@ -2,6 +2,184 @@
 <html>
   <% include head %>
   <body id="whole-body">
-    <% include nav %>
+    <!-- <% include nav %> -->
+	  <section class="u-full-width header">
+	    <h1><big><b>Rejoint</b> l'Association des Anciens Vogtois</big></h1>
+	    <h5>Groupe fermé pour les anciens du Collège François-Xavier Vogt. </h5>
+	    <h5>Échange professionnel, social, associatif et culturel.</h5>
+	    <h5>Opportunité d'affaire, de stage, d'entrepreneuriat.</h5>
+	  </section>
+	  <div class="inner-wrap">
+	  <div class="container">
+	    <form action="/join" method="POST">
+
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label for="firstName">*Prenom</label>
+	          <input class="u-full-width" type="text" placeholder="Daniel" name="firstName" id="firstName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
+	        </div>
+	      </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label for="lastName">*Nom</label>
+	          <input class="u-full-width" type="text" placeholder="Awai" name="lastName" id="lastName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
+	        </div>
+	      </div>
+	      <div class="row form-row">
+		    <div class="eight columns offset-by-two">
+	          <label>*Genre</label>
+	          <label class="radio-inline">
+              	<input type="radio" name="x-gender" id="fem-gender" value="M" data-required>
+              	Masculin
+              </label>
+              <label class="radio-inline">
+             	 <input type="radio" name="x-gender" id="mal-gender" value="F" data-required>
+             	 Feminin
+              </label>
+	        </div>
+          </div>
+          <div class="row form-row">
+          	<div class="eight columns offset-by-two">
+          		<label>*Date de naissance</label>
+          		<input class="u-full-width" type="text" placeholder="Choisis" name="date" id="datepicker" data-required>
+          	</div>
+          </div>
+	      <div class="row form-row">
+	      	<div class="eight columns offset-by-two">
+			  <label for="contact">Contact Telephonique</label>  
+			  <input class="u-full-width" type="text" placeholder="(xxx) xxx-xxxx" name="contact" id="contact" pattern="[a-zA-Z\u00C0-\u017F' -]+" data-required>
+			</div>
+		  </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label for="email">*Email<span class="error"></span></label>
+	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+" data-required>
+	        </div>
+	      </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two error" id="other-error"></div>
+	      </div>
+	      <hr>
+
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <h3>A propos de toi.</h3>
+	          <p>Nous aimerions en savoir un peu plus sur ton parcours a Vogt et ce que tu deviens!
+	          <br>
+	          <small>-- L'AAV est ouverte a tous les anciens Vogtois. Ceci nous aideras juste a recolter des informations pour mieux vous connaitre.</small>
+	          </p>
+	        </div>
+	      </div>
+	      <div class="row form-row">
+	      	<div class="eight columns offset-by-two">
+	      	  <label>Pays de residence</label>
+	      	  <label class="u-full-width">
+	      	  	<input type="text" name="country" placeholder="Cameroun">
+	      	  </label>	
+	      	</div>
+	      </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label>Années de passage au college vogt</label>
+	          <label for="from" class="radio-inline">De
+			  	<input type="text" id="from" name="from"> 
+			  </label>
+			  <label for="to" class="radio-inline">a
+			  	<input type="text" id="to" name="to">
+			  </label>
+	        </div>
+	      </div>
+
+	      <div class="row form-row">
+	      	<div class="eight columns offset-by-two">
+	      	  <label>Niveau d'études actuel</label>
+	      	  <label class="u-full-width">
+	      	  	<input type="text" name="level" placeholder="Licence 1">
+	      	  </label>	
+	      	</div>
+	      </div>
+	      <div class="row form-row">
+	      	<div class="eight columns offset-by-two">
+	      	  <label>Filière d'études actuelle</label>
+	      	  <label class="u-full-width">
+	      	  	<input type="text" name="major" placeholder="comptabilité et gestion">
+	      	  </label>	
+	      	</div>
+	      </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label for="linkedinUsername">Nom d'utilisateur Linkedin<span class="error"></span></label>
+	          <input autocapitalize="off" type="text" placeholder="daniel awai" id="linkedinUsername" name="linkedinUsername" pattern="[a-zA-Z0-9-]*" maxlength="35">
+	        </div>
+	      </div>
+
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label>Quels sont vos interets?<br><small>Que voulez-vous apporter ou en-tirer de l'association!</small></label>
+	          <label class="u-full-width">
+	            <input type="checkbox" name="interests" value="get-job">
+	            <span class="label-body">Trouver un job</span>
+	          </label>
+	          <label class="u-full-width">
+	            <input type="checkbox" name="interests" value="expand-network">
+	            <span class="label-body">Elargir votre réseaux</span>
+	          </label>
+	          <label class="u-full-width">
+	            <input type="checkbox" name="interests" value="collabs">
+	            <span class="label-body">Trouver des collaborateurs pour un projet personel</span>
+	          </label>
+	          <label class="u-full-width">
+	            <input type="checkbox" name="interests" value="find-friends">
+	            <span class="label-body">Prolonger des liens de camraderie - retrouver d'anciens camarades</span>
+	          </label>
+	          <label class="u-full-width">
+	            <input type="checkbox" name="interests" value="rel-vogt">
+	            <span class="label-body">Entretenir des relations avec le College Vogt</span>
+	          </label>
+	          <label class="u-full-width">
+	            <span class="label-body">Autres</span>
+	            <input class="more-input u-full-width" type="text" name="more-interests" placeholder="Entrez un texte">
+	          </label>
+	        </div>
+	      </div>
+
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <label>Comment pensez-vous etre utile a l'association?<br><small>Nous comptons sur tous les membres pour apporter de l'aide afin que nous puissions évoluer tous ensemble</small></label>
+	          <label>
+	            <input type="checkbox" name="experience" value="expertise-help">
+	            <span class="label-body">Mettre votre expertise au service de l'association</span>
+	          </label>
+	          <label>
+	            <input type="checkbox" name="projects" value="represent">
+	            <span class="label-body">Representer votre secteur/pays/ville</span>
+	          </label>
+	          <label>
+	            <input type="checkbox" name="projects" value="mobile-app">
+	            <span class="label-body">Apporter des idees regardant la mise en place de certains services</span>
+	          </label>
+	          <label>
+	            <input type="checkbox" name="projects" value="web-app">
+	            <span class="label-body">Aider dans l'implémentation d'idées et services</span>
+	          </label>
+	          <label class="u-full-width">
+	            <span class="label-body">Autres</span>
+	            <input class="more-input u-full-width" type="text" name="more-projects" placeholder="Entrez un texte">
+	          </label>
+	        </div>
+	      </div>
+
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two">
+	          <input class="button-primary" id="join-button" type="submit" value="Rejoindre">
+	        </div>
+	      </div>
+
+	    </form>
+	  </div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </body>
 </html>

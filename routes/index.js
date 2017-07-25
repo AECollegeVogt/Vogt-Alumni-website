@@ -3,13 +3,13 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Ancien Eleves du College Vogt'
+    title: 'Anciens Eleves du College Vogt'
   });
 });
 
 router.get('/login', function(req, res, next) {
   res.render('login', {
-    title: 'Login | Ancien Eleves du College Vogt'
+    title: 'Login | Anciens Eleves du College Vogt'
   });
 });
 
