@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var db = require('./database');
 
 var index = require('./routes/index');
-var config = require('./config-example');
+var config = require('./config');
 
 var app = express();
 

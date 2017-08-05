@@ -1,6 +1,8 @@
 //mongoDB setup
-var mongoose = require('mongoose');    
-var uri = 'mongodb://admin:6239@ds145208.mlab.com:45208/aavdatabase';//todo: hide username and password
+var mongoose = require('mongoose'); 
+var config = require('./config');
+
+var uri = config.db.url;
 mongoose.connect(uri, { useMongoClient: true}); 
 var db = mongoose.connection;
 

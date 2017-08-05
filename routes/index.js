@@ -1,5 +1,5 @@
 var https = require('https');
-var config = require('../config-example');
+var config = require('../config');
 var mongoose = require('mongoose');
 var querystring = require('querystring');
 var User = mongoose.model('User');
@@ -95,7 +95,7 @@ let addToSlack = (email, cb) => {
     // also note this api endpoint is "undocumented" and subject to change
     let data = querystring.stringify({
       email: email,
-      token: 'xoxp-195178403538-194611339585-220548717222-5408ce7d8ea3ca766cf2281cb015c92b',//tried to use config.slack.token here but didn't work
+      token: config.slack.token,
       set_active: true
     });
 
