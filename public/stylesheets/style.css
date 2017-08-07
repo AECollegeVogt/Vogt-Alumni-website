@@ -1,6 +1,9 @@
 header + div {
   padding-top: 150px;
 }
+h4 {
+  color: #ef8409;
+}
 
 #error {
   text-align: center;
@@ -19,6 +22,9 @@ header + div {
   color: #ef8409;
 }
 
+.footer {
+  background-color: #1764b2;
+}
 .form-row {
   padding-top: 4rem;
 }
@@ -95,3 +101,17 @@ form {
 .inner-wrap {
   background-color: #b3ecff;
 }
+
+.icon {
+  width:100px;
+}
+
+/** Icons */
+.icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }
+.icon > svg path { fill: #828282; }
+
+.footer-icon > svg { display: inline-block; width: 32px; height: 32px; vertical-align: middle; }
+.footer-icon > svg path { fill: #FFFFFF; }
+
+.footer-icon-abs > svg { display: inline-block; width: 32px; height: 32px; vertical-align: middle; }
+.footer-icon-abs > svg path { fill: #EAEAEA; }
