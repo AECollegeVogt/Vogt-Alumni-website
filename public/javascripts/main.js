@@ -1,32 +1,25 @@
 $(document).ready(function() {
   $("#year").html( (new Date).getFullYear() );
-  $("#resources").mouseenter(function(){
-    $("#resources-menu").show(); 
-  });
-  $("#resources, #resources-menu").mouseleave(function(){
-    $("#resources-menu").hide(); 
-  });
 
-  $("#activities").mouseenter(function(){
-    $("#activities-menu").show(); 
-  });
-  $("#activities, #activities-menu").mouseleave(function(){
-    $("#activities-menu").hide(); 
-  });
+  $("#activities").click(function(){
+    if($("#social").is(":visible") == true) {
+      $("#social").hide();
+    } else {
+      $("#main").hide();
+    }   
+    $("#action").show();
+    return false;
+}); 
 
-  $("#life").mouseenter(function(){
-    $("#life-menu").show(); 
-  });
-  $("#life, #life-menu").mouseleave(function(){
-    $("#life-menu").hide(); 
-  });
-
-  $("#carnet").mouseenter(function(){
-    $("#carnet-menu").show(); 
-  });
-  $("#carnet, #carnet-menu").mouseleave(function(){
-    $("#carnet-menu").hide(); 
-  });
+  $("#life").click(function(){
+    if($("#action").is(":visible") == true) {
+      $("#action").hide();
+    } else {
+      $("#main").hide();
+    }   
+    $("#social").show();
+    return false;
+});
 
 });
 

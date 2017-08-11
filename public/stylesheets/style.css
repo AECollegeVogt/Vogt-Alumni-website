@@ -5,6 +5,17 @@ h4 {
   color: #ef8409;
 }
 
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+}
+
+.input-group .form-control
+{
+    display: compact;
+}
+
 .bureau {
   background-color: turquoise;
 }
@@ -55,12 +66,7 @@ input:invalid {
   color: #ef8409;
 }
 
-.jumbotron
-{
-  padding: 80px 15px;
-}
-
-.overlay-container {
+.overlay-container, #action, #social {
   display: none;
 }
 
@@ -82,16 +88,17 @@ input:invalid {
 }
 
 .message-container {
-  background-color: white;
+  background-color: #b3ecff;
   position: fixed;
   z-index: 2;
   top: calc(50% - 75px);
   left: calc(50% - 250px);
   width: 500px;
-  height: 150px;
+  height: 250px;
   text-align: center;
   padding-top: 25px;
-  border-radius: 2px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px rgba(0,0,0,.2);
 }
 
 .personbox {

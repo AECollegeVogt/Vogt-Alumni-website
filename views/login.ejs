@@ -2,6 +2,7 @@
 <html>
   <% include head %>
   <body id="whole-body">
+  	<% include nav %>
       <span class="overlay-container">
 	    <div class="overlay"></div>
 	    <div class="message-container">
@@ -47,13 +48,13 @@
           <div class="row form-row">
           	<div class="eight columns offset-by-two">
           		<label for="dateOfBirth">*Date de naissance</label>
-          		<input class="u-full-width" type="text" placeholder="Choisis" name="dateOfBirth" id="datepicker" data-required>
+          		<input class="u-full-width" type="text" placeholder="Choisis" name="dateOfBirth" id="datepicker" data-required readonly="true">
           	</div>
           </div>
 	      <div class="row form-row">
 	      	<div class="eight columns offset-by-two">
 			  <label for="contact">Contact Telephonique</label>  
-			  <input class="u-full-width" type="text" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required>
+			  <input class="u-full-width" type="tel" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required>
 			</div>
 		  </div>
 	      <div class="row form-row">
@@ -88,10 +89,10 @@
 	        <div class="eight columns offset-by-two">
 	          <label>Années de passage au college vogt</label>
 	          <label for="from" class="radio-inline">De
-			  	<input type="text" id="from" name="from"> 
+			  	<input type="text" id="from" name="from" readonly="true"> 
 			  </label>
 			  <label for="to" class="radio-inline">a
-			  	<input type="text" id="to" name="to">
+			  	<input type="text" id="to" name="to" readonly="true">
 			  </label>
 	        </div>
 	      </div>
