@@ -105,6 +105,7 @@ $(function () {
         type: form.attr('method'),
         data: form.serialize()
       }).then(function (data) {
+        console.log('things are happening');
         $('.overlay-container').show();
         $('#join-button').hide();
         // To clear fields, so no annoying closing messages displayed by browser
@@ -112,7 +113,7 @@ $(function () {
       }, function (res) {
         var data = JSON.parse(JSON.stringify(res.responseText));
         
-
+        console.log('doesnt recognize email somehow');
         var errorElement;
         if (!data.emailValid) {
           errorElement = $('label[for=email] .error');

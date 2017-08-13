@@ -21,19 +21,19 @@
 	    <form action="/join" method="POST">
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="firstName">*Prenom</label>
 	          <input class="u-full-width" type="text" placeholder="Daniel" name="firstName" id="firstName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="lastName">*Nom</label>
 	          <input class="u-full-width" type="text" placeholder="Awai" name="lastName" id="lastName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-		    <div class="eight columns offset-by-two">
+		    <div class="eight columns offset-by-two col-md-8">
 	          <label for="gender">*Genre</label>
 	          <label class="radio-inline">
               	<input type="radio" name="gender" id="m-gender" value="M" data-required>
@@ -46,30 +46,30 @@
 	        </div>
           </div>
           <div class="row form-row">
-          	<div class="eight columns offset-by-two">
+          	<div class="eight columns offset-by-two col-md-8">
           		<label for="dateOfBirth">*Date de naissance</label>
           		<input class="u-full-width" type="text" placeholder="Choisis" name="dateOfBirth" id="datepicker" data-required readonly="true">
           	</div>
           </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 			  <label for="contact">Contact Telephonique</label>  
 			  <input class="u-full-width" type="tel" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required>
 			</div>
 		  </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="email">*Email<span class="error"></span></label>
 	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two error" id="other-error"></div>
+	        <div class="eight columns offset-by-two error col-md-8" id="other-error"></div>
 	      </div>
 	      <hr>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <h3>A propos de toi.</h3>
 	          <p>Nous aimerions en savoir un peu plus sur ton parcours a Vogt et ce que tu deviens!
 	          <br>
@@ -78,7 +78,7 @@
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Pays de residence</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="country" placeholder="Cameroun">
@@ -86,7 +86,7 @@
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label>Années de passage au college vogt</label>
 	          <label for="from" class="radio-inline">De
 			  	<input type="text" id="from" name="from" readonly="true"> 
@@ -98,7 +98,7 @@
 	      </div>
 
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Niveau d'études actuel</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="level" placeholder="Licence 1">
@@ -106,7 +106,7 @@
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Filière d'études actuelle</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="major" placeholder="comptabilité et gestion">
@@ -114,14 +114,14 @@
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="linkedinUsername">Nom d'utilisateur Linkedin<span class="error"></span></label>
 	          <input autocapitalize="off" type="text" placeholder="daniel awai" id="linkedinUsername" name="linkedinUsername" pattern="[a-zA-Z0-9-]*" maxlength="35">
 	        </div>
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label>Quels sont vos interets?<br><small>Que voulez-vous apporter ou en-tirer de l'association!</small></label>
 	          <label class="u-full-width">
 	            <input type="checkbox" name="interests" value="get-job">
@@ -151,7 +151,7 @@
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label>Comment pensez-vous etre utile a l'association?<br><small>Nous comptons sur tous les membres pour apporter de l'aide afin que nous puissions évoluer tous ensemble</small></label>
 	          <label>
 	            <input type="checkbox" name="experience" value="expertise-help">
@@ -177,7 +177,7 @@
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8 text-center">
 	          <input class="button-primary" id="join-button" type="submit" value="Rejoindre">
 	        </div>
 	      </div>
