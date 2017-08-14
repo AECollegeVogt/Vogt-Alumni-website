@@ -54,13 +54,13 @@
 	      <div class="row form-row">
 	      	<div class="eight columns offset-by-two col-md-8">
 			  <label for="contact">Contact Telephonique</label>  
-			  <input class="u-full-width" type="tel" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required>
+			  <input class="u-full-width" type="tel" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required pattern="/[\d()\s+.,x\-]+/i">
 			</div>
 		  </div>
 	      <div class="row form-row">
 	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="email">*Email<span class="error"></span></label>
-	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+" data-required>
+	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+">
 	        </div>
 	      </div>
 	      <div class="row form-row">
