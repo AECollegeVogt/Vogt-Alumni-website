@@ -9,7 +9,7 @@ $(document).ready(function() {
     }   
     $("#action").show();
     return false;
-}); 
+  }); 
 
   $("#life").click(function(){
     if($("#action").is(":visible") == true) {
@@ -19,8 +19,22 @@ $(document).ready(function() {
     }   
     $("#social").show();
     return false;
-});
+  });
+/*
+if($("login").click == true) {
+  if($("#activities").click == true) {
+    location.href="/";
+    $("#action").show();
+    return false;
+    };
 
+  if($("#life").click == true) {
+    location.href="/";
+    $("#social").show();
+    return false;
+    };
+  };
+*/
 });
 
 //datepicker for date of birth
@@ -114,6 +128,7 @@ $(function () {
         var data = JSON.parse(JSON.stringify(res.responseText));
         
         console.log('doesnt recognize email somehow');
+
         var errorElement;
         if (!data.emailValid) {
           errorElement = $('label[for=email] .error');
