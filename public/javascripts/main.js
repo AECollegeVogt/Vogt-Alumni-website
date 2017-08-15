@@ -34,7 +34,7 @@ if($("login").click == true) {
     return false;
     };
   };
-*/
+*/ 
 });
 
 //datepicker for date of birth
