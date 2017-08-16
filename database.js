@@ -10,3 +10,8 @@ require('./models/user');
 require('./models/survey');
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {  
+	let logger = require('./logger/logger.js')();  
+	logger.info('MongoDB successfully  connected!'); 
+});
+
