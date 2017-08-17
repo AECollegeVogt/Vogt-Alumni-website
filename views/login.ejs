@@ -8,7 +8,7 @@
 	    <div class="message-container">
 	      <h2 id="message-title">Merci d'avoir rejoint l'association</h2>
 	      <p id="message-description">Bien vouloir accepter l'invitation qui vous a été envoyée par email pour rejoindre notre groupe Slack!</p><br>
-	      <p><a href="/"><strong>Retour vers la page d'acceuil!</strong><a></p>
+	      <p><a href="/"><strong>Retour vers la page d'acceuil!</strong></a></p>
 	    </div>
 	  </span>	
 	  <section class="u-full-width header">
@@ -61,7 +61,7 @@
 	      <div class="row form-row">
 	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="email">*Email<span class="error"></span></label>
-	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+">
+	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
@@ -186,6 +186,7 @@
 	    </form>
 	  </div>
 	</div>
+	<% include footer %>
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
   </body>
 </html>

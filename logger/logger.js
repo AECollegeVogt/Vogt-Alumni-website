@@ -14,7 +14,7 @@ module.exports = () => (new winston.Logger({
     }),
     new (Slack)({
       channel: '#random',
-      webhookUri: config.slack.webhookUri,//tried to use config.slack.webhookUri here but didn't work
+      webhookUri: config.slack.webhookUri,
       username: config.slack.username,
       level: 'error'
     })

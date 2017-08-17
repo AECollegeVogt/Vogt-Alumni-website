@@ -20,21 +20,12 @@ $(document).ready(function() {
     $("#social").show();
     return false;
   });
-/*
-if($("login").click == true) {
-  if($("#activities").click == true) {
-    location.href="/";
-    $("#action").show();
-    return false;
-    };
 
-  if($("#life").click == true) {
-    location.href="/";
-    $("#social").show();
-    return false;
-    };
-  };
-*/ 
+  //close menu if click on menu link --small devices only
+  $('.nav a').click(function(){
+    $('.navbar-collapse').collapse('hide');
+  });
+  
 });
 
 //datepicker for date of birth
@@ -127,8 +118,6 @@ $(function () {
       }, function (res) {
         var data = JSON.parse(JSON.stringify(res.responseText));
         
-        console.log('doesnt recognize email somehow');
-
         var errorElement;
         if (!data.emailValid) {
           errorElement = $('label[for=email] .error');
