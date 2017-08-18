@@ -3,6 +3,7 @@ let Schema = mongoose.Schema;
 
 let surveySchema = new Schema({
   'country': String,
+  'city': String,
   'from': String,
   'to': String,
   'level': String,

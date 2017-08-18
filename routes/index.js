@@ -62,6 +62,7 @@ router.post('/join', (req, res, next) => {
       if (!user.submittedSurvey) {
         return new Survey({
           'country': body['country'],
+      'city': body['city'],
 		  'from': body['from'],
 		  'to': body['to'],
 		  'level': body['level'],

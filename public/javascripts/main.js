@@ -25,8 +25,15 @@ $(document).ready(function() {
   $('.nav a').click(function(){
     $('.navbar-collapse').collapse('hide');
   });
-  
+
+  $("#contact").intlTelInput({
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
+    preferredCountries: ['cm', 'fr'],
+  }); 
+
 });
+
+
 
 //datepicker for date of birth
 $(function(){
