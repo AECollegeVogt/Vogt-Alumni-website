@@ -2,37 +2,39 @@
 <html>
   <% include head %>
   <body id="whole-body">
+  	<% include nav %>
       <span class="overlay-container">
 	    <div class="overlay"></div>
 	    <div class="message-container">
 	      <h2 id="message-title">Merci d'avoir rejoint l'association</h2>
-	      <p id="message-description">Bien vouloir accepter l'invitation qui vous a été envoyée par email pour rejoindre notre groupe Slack!</p>
+	      <p id="message-description">Bien vouloir accepter l'invitation qui vous a été envoyée par email pour rejoindre notre groupe Slack!</p><br>
+	      <p><a href="/"><strong>Retour vers la page d'accueil!</strong></a></p>
 	    </div>
 	  </span>	
 	  <section class="u-full-width header">
-	    <h1><big><b>Rejoint</b> Vogt Alumni</big></h1>
+	    <h1><big><b>Rejoins</b> Vogt Alumni</big></h1>
 	    <h5>Groupe fermé pour les anciens du Collège François-Xavier Vogt. </h5>
 	    <h5>Échange professionnel, social, associatif et culturel.</h5>
-	    <h5>Opportunité d'affaire, de stage, d'entrepreneuriat.</h5>
+	    <h5>Opportunités d'affaire, de stage et d'entrepreneuriat.</h5>
 	  </section>
 	  <div class="inner-wrap">
 	  <div class="container">
 	    <form action="/join" method="POST">
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="firstName">*Prenom</label>
 	          <input class="u-full-width" type="text" placeholder="Daniel" name="firstName" id="firstName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="lastName">*Nom</label>
 	          <input class="u-full-width" type="text" placeholder="Awai" name="lastName" id="lastName" pattern="[a-zA-Z\u00C0-\u017F' -]+" maxlength="35" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-		    <div class="eight columns offset-by-two">
+		    <div class="eight columns offset-by-two col-md-8">
 	          <label for="gender">*Genre</label>
 	          <label class="radio-inline">
               	<input type="radio" name="gender" id="m-gender" value="M" data-required>
@@ -45,59 +47,67 @@
 	        </div>
           </div>
           <div class="row form-row">
-          	<div class="eight columns offset-by-two">
+          	<div class="eight columns offset-by-two col-md-8">
           		<label for="dateOfBirth">*Date de naissance</label>
-          		<input class="u-full-width" type="text" placeholder="Choisis" name="dateOfBirth" id="datepicker" data-required>
+          		<input class="u-full-width" type="text" placeholder="Choisis" name="dateOfBirth" id="datepicker" data-required readonly="true">
           	</div>
           </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
-			  <label for="contact">Contact Telephonique</label>  
-			  <input class="u-full-width" type="text" placeholder="(xxx)xxx-xxxx" name="contact" id="contact" data-required>
+	      	<div class="eight columns offset-by-two col-md-8">
+			  <label for="contact">*Contact Telephonique</label>  
+			  <input class="u-full-width" type="tel" name="contact" id="contact" data-required>
 			</div>
 		  </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="email">*Email<span class="error"></span></label>
 	          <input class="u-full-width" type="email" placeholder="daniel@awai.com" name="email" id="email" pattern="[\w.+-]*\w+@[\w-]+(\.[\w-]+)+" data-required>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two error" id="other-error"></div>
+	        <div class="eight columns offset-by-two error col-md-8" id="other-error"></div>
 	      </div>
 	      <hr>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <h3>A propos de toi.</h3>
-	          <p>Nous aimerions en savoir un peu plus sur ton parcours a Vogt et ce que tu deviens!
+	          <p>Nous aimerions en savoir un peu plus sur ton parcours au Collège Vogt et ce que tu deviens!
 	          <br>
-	          <small>-- L'AAV est ouverte a tous les anciens Vogtois. Ceci nous aideras juste a recolter des informations pour mieux vous connaitre.</small>
+	          <small>-- Vogt Alumni est ouvert uniquement à tous les anciens Vogtois. Ceci nous aideras juste à recolter des informations pour mieux vous connaitre.</small>
 	          </p>
 	        </div>
 	      </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
-	      	  <label>Pays de residence</label>
+	      	<div class="eight columns offset-by-two col-md-8">
+	      	  <label>Pays de résidence</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="country" placeholder="Cameroun">
 	      	  </label>	
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
-	          <label>Années de passage au college vogt</label>
+	      	<div class="eight columns offset-by-two col-md-8">
+	      	  <label>Ville</label>
+	      	  <label class="u-full-width">
+	      	  	<input type="text" name="city" placeholder="Yaoundé">
+	      	  </label>	
+	      	</div>
+	      </div>
+	      <div class="row form-row">
+	        <div class="eight columns offset-by-two col-md-8">
+	          <label>Années de passage au Collège vogt</label>
 	          <label for="from" class="radio-inline">De
-			  	<input type="text" id="from" name="from"> 
+			  	<input type="text" id="from" name="from" readonly="true"> 
 			  </label>
 			  <label for="to" class="radio-inline">a
-			  	<input type="text" id="to" name="to">
+			  	<input type="text" id="to" name="to" readonly="true">
 			  </label>
 	        </div>
 	      </div>
 
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Niveau d'études actuel</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="level" placeholder="Licence 1">
@@ -105,7 +115,7 @@
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	      	<div class="eight columns offset-by-two">
+	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Filière d'études actuelle</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="major" placeholder="comptabilité et gestion">
@@ -113,15 +123,15 @@
 	      	</div>
 	      </div>
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="linkedinUsername">Nom d'utilisateur Linkedin<span class="error"></span></label>
 	          <input autocapitalize="off" type="text" placeholder="daniel awai" id="linkedinUsername" name="linkedinUsername" pattern="[a-zA-Z0-9-]*" maxlength="35">
 	        </div>
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
-	          <label>Quels sont vos interets?<br><small>Que voulez-vous apporter ou en-tirer de l'association!</small></label>
+	        <div class="eight columns offset-by-two col-md-8">
+	          <label>Quels sont vos intérets?<br><small>Que voulez-vous en-tirer de l'association!</small></label>
 	          <label class="u-full-width">
 	            <input type="checkbox" name="interests" value="get-job">
 	            <span class="label-body">Trouver un job</span>
@@ -150,7 +160,7 @@
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8">
 	          <label>Comment pensez-vous etre utile a l'association?<br><small>Nous comptons sur tous les membres pour apporter de l'aide afin que nous puissions évoluer tous ensemble</small></label>
 	          <label>
 	            <input type="checkbox" name="experience" value="expertise-help">
@@ -158,11 +168,11 @@
 	          </label>
 	          <label>
 	            <input type="checkbox" name="experience" value="represent">
-	            <span class="label-body">Representer votre secteur/pays/ville</span>
+	            <span class="label-body">Représenter votre secteur/pays/ville</span>
 	          </label>
 	          <label>
 	            <input type="checkbox" name="experience" value="propose-ideas">
-	            <span class="label-body">Apporter des idees regardant la mise en place de certains services</span>
+	            <span class="label-body">Apporter des idées regardant la mise en place de certains services</span>
 	          </label>
 	          <label>
 	            <input type="checkbox" name="experience" value="help-realizing-ideas">
@@ -176,7 +186,7 @@
 	      </div>
 
 	      <div class="row form-row">
-	        <div class="eight columns offset-by-two">
+	        <div class="eight columns offset-by-two col-md-8 text-center">
 	          <input class="button-primary" id="join-button" type="submit" value="Rejoindre">
 	        </div>
 	      </div>
@@ -184,6 +194,9 @@
 	    </form>
 	  </div>
 	</div>
+
+	<% include footer %>
+	
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
   </body>
 </html>

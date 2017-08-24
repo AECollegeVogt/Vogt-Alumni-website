@@ -1,34 +1,39 @@
 $(document).ready(function() {
   $("#year").html( (new Date).getFullYear() );
-  $("#resources").mouseenter(function(){
-    $("#resources-menu").show(); 
-  });
-  $("#resources, #resources-menu").mouseleave(function(){
-    $("#resources-menu").hide(); 
+
+  $("#activities").click(function(){
+    if($("#social").is(":visible") == true) {
+      $("#social").hide();
+    } else {
+      $("#main").hide();
+    }   
+    $("#action").show();
+    return false;
+  }); 
+
+  $("#life").click(function(){
+    if($("#action").is(":visible") == true) {
+      $("#action").hide();
+    } else {
+      $("#main").hide();
+    }   
+    $("#social").show();
+    return false;
   });
 
-  $("#activities").mouseenter(function(){
-    $("#activities-menu").show(); 
-  });
-  $("#activities, #activities-menu").mouseleave(function(){
-    $("#activities-menu").hide(); 
+  //close menu if click on menu link --small devices only
+  $('.nav a').click(function(){
+    $('.navbar-collapse').collapse('hide');
   });
 
-  $("#life").mouseenter(function(){
-    $("#life-menu").show(); 
-  });
-  $("#life, #life-menu").mouseleave(function(){
-    $("#life-menu").hide(); 
-  });
-
-  $("#carnet").mouseenter(function(){
-    $("#carnet-menu").show(); 
-  });
-  $("#carnet, #carnet-menu").mouseleave(function(){
-    $("#carnet-menu").hide(); 
-  });
+  $("#contact").intlTelInput({
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
+    preferredCountries: ['cm', 'fr'],
+  }); 
 
 });
+
+
 
 //datepicker for date of birth
 $(function(){
@@ -112,6 +117,7 @@ $(function () {
         type: form.attr('method'),
         data: form.serialize()
       }).then(function (data) {
+        console.log('things are happening');
         $('.overlay-container').show();
         $('#join-button').hide();
         // To clear fields, so no annoying closing messages displayed by browser
@@ -119,7 +125,6 @@ $(function () {
       }, function (res) {
         var data = JSON.parse(JSON.stringify(res.responseText));
         
-
         var errorElement;
         if (!data.emailValid) {
           errorElement = $('label[for=email] .error');

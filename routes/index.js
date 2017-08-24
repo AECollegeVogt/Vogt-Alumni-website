@@ -25,7 +25,19 @@ router.get('/', (req, res) => {
 
 router.get('/login', (req, res, next) => {
   res.render('login', {
-    title: 'Login | Vogt Alumni'
+    title: 'Inscription | Vogt Alumni'
+  });
+});
+
+router.get('/action', (req, res, next) => {
+  res.render('action', {
+    title: 'Manifestations | Vogt Alumni'
+  });
+});
+
+router.get('/social', (req, res, next) => {
+  res.render('social', {
+    title: 'Vie Associative | Vogt Alumni'
   });
 });
 
@@ -50,6 +62,7 @@ router.post('/join', (req, res, next) => {
       if (!user.submittedSurvey) {
         return new Survey({
           'country': body['country'],
+      'city': body['city'],
 		  'from': body['from'],
 		  'to': body['to'],
 		  'level': body['level'],

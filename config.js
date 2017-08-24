@@ -1,3 +1,4 @@
+//issue here: env variables not defined when app in production
 var config;
 
 try {
