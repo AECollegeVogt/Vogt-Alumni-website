@@ -44,14 +44,13 @@ router.get('/social', (req, res, next) => {
 router.post('/join', (req, res, next) => {
     let response = JSON.parse(ajaxResponse);
     let body = req.body;
-    var number = $("demo").intlTelInput("getNumber");
 
     let userObj = {
       firstName: body.firstName,
       lastName: body.lastName,
       gender: body['gender'],
       dateOfBirth: body.dateOfBirth,
-      contact: number,
+      contact: body.contact,
       email: body.email
     };
 
