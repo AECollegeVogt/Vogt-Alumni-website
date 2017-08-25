@@ -30,7 +30,9 @@ $(document).ready(function() {
   // get the country data from the plugin
   var countryData = $.fn.intlTelInput.getCountryData(),
     telInput = $("#contact"),
-    addressDropdown = $("#current-country");
+    addressDropdown = $("#current-country"),
+          errorMsg = $("#error-msg"),
+          validMsg = $("#valid-msg");
 
   // init plugin
   telInput.intlTelInput({
@@ -55,6 +57,26 @@ $(document).ready(function() {
   addressDropdown.change(function() {
     telInput.intlTelInput("setCountry", $(this).val());
   });
+
+  var reset = function() {
+      telInput.removeClass("error");
+      errorMsg.addClass("hide");
+      validMsg.addClass("hide");
+    };
+    // on blur: validate
+    telInput.blur(function() {
+      reset();
+      if ($.trim(telInput.val())) {
+        if (telInput.intlTelInput("isValidNumber")) {
+          validMsg.removeClass("hide");
+        } else {
+          telInput.addClass("error");
+          errorMsg.removeClass("hide");
+        }
+      }
+    });
+    // on keyup / change flag: reset
+    telInput.on("keyup change", reset);
 
 });
 
@@ -126,9 +148,7 @@ $(function () {
     var requiredMatched = true;
     var form = $('form');
     var inputs = $('input[data-required]');
-    var telInput = $("#contact"),
-          errorMsg = $("#error-msg"),
-          validMsg = $("#valid-msg");
+    
 
     inputs.each(function (i, el) {
       if (!el.checkValidity() || el.value === '') {
@@ -137,31 +157,6 @@ $(function () {
         scrollToElement(form);
       }
     });
-
-    // initialise plugin
-    telInput.intlTelInput({
-      utilsScript: "/javascripts/utils.js",
-      preferredCountries: ['cm', 'fr']
-    });  
-    var reset = function() {
-      telInput.removeClass("error");
-      errorMsg.addClass("hide");
-      validMsg.addClass("hide");
-    };
-    // on blur: validate
-    telInput.blur(function() {
-      reset();
-      if ($.trim(telInput.val())) {
-        if (telInput.intlTelInput("isValidNumber")) {
-          validMsg.removeClass("hide");
-        } else {
-          telInput.addClass("error");
-          errorMsg.removeClass("hide");
-        }
-      }
-    });
-    // on keyup / change flag: reset
-    telInput.on("keyup change", reset);
 
     if (requiredMatched) {
 

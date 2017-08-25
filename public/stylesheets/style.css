@@ -13,6 +13,14 @@ a:link {
   background-color: turquoise;
 }
 
+#error-msg {
+  color: red;
+}
+
+#valid-msg {
+  color: green;
+}
+
 #error {
   text-align: center;
 }
