@@ -102,12 +102,16 @@ input:invalid {
   box-shadow: 10px 10px 5px rgba(0,0,0,.2);
 }
 
+#resources {
+  background-color: #ffd3f1;
+}
 .personbox-link {
   display: block;
 }
 
-.personbox-link:focus {
+.personbox-link:hover h1{
   outline: 0;
+  color: #1764b2;
 }
 
 .personbox {
@@ -137,9 +141,6 @@ input:invalid {
   width: 210px;
 }
 
-#whole-body {
-
-}
 form {
   background: #fffaf6;
   border-radius: 4px;
