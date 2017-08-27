@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   $("#year").html( (new Date).getFullYear() );
 
@@ -26,10 +27,56 @@ $(document).ready(function() {
     $('.navbar-collapse').collapse('hide');
   });
 
-  $("#contact").intlTelInput({
-    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
-    preferredCountries: ['cm', 'fr'],
-  }); 
+  // get the country data from the plugin
+  var countryData = $.fn.intlTelInput.getCountryData(),
+    telInput = $("#contact"),
+    addressDropdown = $("#current-country"),
+          errorMsg = $("#error-msg"),
+          validMsg = $("#valid-msg");
+
+  // init plugin
+  telInput.intlTelInput({
+    utilsScript: "/javascripts/utils.js", // just for formatting/placeholders etc
+    preferredCountries: ['cm', 'fr']
+  });
+
+  // populate the country dropdown
+  $.each(countryData, function(i, country) {
+    addressDropdown.append($("<option></option>").attr("value", country.iso2).text(country.name));
+  });
+  // set it's initial value
+  var initialCountry = telInput.intlTelInput("getSelectedCountryData").iso2;
+  addressDropdown.val(initialCountry);
+
+  // listen to the telephone input for changes
+  telInput.on("countrychange", function(e, countryData) {
+    addressDropdown.val(countryData.iso2);
+  });
+
+  // listen to the address dropdown for changes
+  addressDropdown.change(function() {
+    telInput.intlTelInput("setCountry", $(this).val());
+  });
+
+  var reset = function() {
+      telInput.removeClass("error");
+      errorMsg.addClass("hide");
+      validMsg.addClass("hide");
+    };
+    // on blur: validate
+    telInput.blur(function() {
+      reset();
+      if ($.trim(telInput.val())) {
+        if (telInput.intlTelInput("isValidNumber")) {
+          validMsg.removeClass("hide");
+        } else {
+          telInput.addClass("error");
+          errorMsg.removeClass("hide");
+        }
+      }
+    });
+    // on keyup / change flag: reset
+    telInput.on("keyup change", reset);
 
 });
 
@@ -101,6 +148,7 @@ $(function () {
     var requiredMatched = true;
     var form = $('form');
     var inputs = $('input[data-required]');
+    
 
     inputs.each(function (i, el) {
       if (!el.checkValidity() || el.value === '') {
@@ -112,10 +160,18 @@ $(function () {
 
     if (requiredMatched) {
 
+      var formData = $('#form').serializeArray(); 
+      for (var i = 0; i < formData.length; i++) {  
+        if (formData[i].name === 'contact') {    
+          formData[i].value = $("#contact").intlTelInput('getNumber');    
+          break;  
+        } 
+      };
+
       $.ajax({
         url: form.attr('action'),
         type: form.attr('method'),
-        data: form.serialize()
+        data: $.param(formData)
       }).then(function (data) {
         console.log('things are happening');
         $('.overlay-container').show();
@@ -130,6 +186,7 @@ $(function () {
           errorElement = $('label[for=email] .error');
           scrollToElement(errorElement);
           renderError(errorElement, ' - ' + data.errorMessage);
+          console.log(email);
         } 
         else {
           errorElement = $('#other-error');

@@ -19,7 +19,7 @@
 	  </section>
 	  <div class="inner-wrap">
 	  <div class="container">
-	    <form action="/join" method="POST">
+	    <form action="/join" method="POST" id='form'>
 
 	      <div class="row form-row">
 	        <div class="eight columns offset-by-two col-md-8">
@@ -56,6 +56,8 @@
 	      	<div class="eight columns offset-by-two col-md-8">
 			  <label for="contact">*Contact Telephonique</label>  
 			  <input class="u-full-width" type="tel" name="contact" id="contact" data-required>
+			  <span id="valid-msg" class="hide">✓ Valid</span>
+			  <span id="error-msg" class="hide">Invalid number</span>
 			</div>
 		  </div>
 	      <div class="row form-row">
@@ -81,9 +83,7 @@
 	      <div class="row form-row">
 	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Pays de résidence</label>
-	      	  <label class="u-full-width">
-	      	  	<input type="text" name="country" placeholder="Cameroun">
-	      	  </label>	
+	      	  <select class="u-full-width" id="current-country" name="country"></select>	
 	      	</div>
 	      </div>
 	      <div class="row form-row">
@@ -102,7 +102,8 @@
 			  </label>
 			  <label for="to" class="radio-inline">a
 			  	<input type="text" id="to" name="to" readonly="true">
-			  </label>
+			  </label><br>
+			  <small>Ceci est juste une approximation.</small>
 	        </div>
 	      </div>
 
@@ -125,7 +126,7 @@
 	      <div class="row form-row">
 	        <div class="eight columns offset-by-two col-md-8">
 	          <label for="linkedinUsername">Nom d'utilisateur Linkedin<span class="error"></span></label>
-	          <input autocapitalize="off" type="text" placeholder="daniel awai" id="linkedinUsername" name="linkedinUsername" pattern="[a-zA-Z0-9-]*" maxlength="35">
+	          <input autocapitalize="off" type="text" placeholder="daniel awai" id="linkedinUsername" name="linkedinUsername">
 	        </div>
 	      </div>
 
@@ -146,7 +147,7 @@
 	          </label>
 	          <label class="u-full-width">
 	            <input type="checkbox" name="interests" value="find-friends">
-	            <span class="label-body">Prolonger des liens de camraderie - retrouver d'anciens camarades</span>
+	            <span class="label-body">Prolonger des liens de camaraderie - retrouver d'anciens camarades</span>
 	          </label>
 	          <label class="u-full-width">
 	            <input type="checkbox" name="interests" value="relationship-vogt">

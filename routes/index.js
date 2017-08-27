@@ -113,7 +113,7 @@ let addToSlack = (email, cb) => {
     });
 
     let options = {
-      hostname: 'chimehack2017.slack.com',
+      hostname: 'vogtalumni.slack.com',
       path: '/api/users.admin.invite',
       method: 'POST',
       headers: {

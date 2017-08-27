@@ -13,7 +13,7 @@ module.exports = () => (new winston.Logger({
       'timestamp': true
     }),
     new (Slack)({
-      channel: '#random',
+      channel: '#serverlogs',
       webhookUri: config.slack.webhookUri,
       username: config.slack.username,
       level: 'error'
