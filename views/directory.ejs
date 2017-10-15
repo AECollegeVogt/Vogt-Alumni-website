@@ -3,8 +3,39 @@
     <% include head %>
     <body>
         <div>
+        	<table>
             <% users.forEach(function(user){ %>
-                <p> email: <%=user.email %> </p>
+                <tr> 
+                	<th>First Name</th>
+                	<th>Last Name</th> 
+                	<th>email</th> 
+                	<th>Gender</th> 
+                	<th>Date of Birth</th> 
+                	<th>Contact</th> 
+                	<th>Country</th> 
+                	<th>City</th>
+                	<th>Level</th>
+                	<th>Major</th>
+                	<th>Linkedin</th>
+                	<th>Interests</th>
+                	<th>Experience</th>
+                </tr>
+                <tr>
+                	<td><%=user.firstName %></td>
+                	<td><%=user.lastName %></td>
+                	<td><%=user.email %></td>
+                	<td><%=user.gender %></td>
+                	<td><%=user.dateOfBirth %></td>
+                	<td><%=user.contact %></td>
+                	<td><%=user.description.country %></td>
+                	<td><%=user.description.city %></td>
+                	<td><%=user.description.level %></td>
+                	<td><%=user.description.major %></td>
+                	<td><%=user.description.linkedinUsername %></td>
+                	<td><%= user.description.interests %></td>
+                	<td><%= user.description.experience %></td>
+                </tr>
+            </table>
               <% }); %>
         </div>
     </body>
