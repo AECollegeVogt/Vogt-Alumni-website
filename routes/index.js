@@ -62,28 +62,30 @@ router.post('/join', (req, res, next) => {
     // Email exists? Update
     // Email original? Create new using upsert
     User.findOneAndUpdate({email: userObj.email}, userObj, {upsert: true, new: true}).exec().then((user) => {
-      if (!user.submittedSurvey) {
-        return new Survey({
-          'country': body['country'],
-      'city': body['city'],
-		  'from': body['from'],
-		  'to': body['to'],
-		  'level': body['level'],
-		  'major': body['major'],
-		  'linkedinUsername': body['linkedinUsername'],
-		  'interests': body.interests,
-		  'more-interests': body['more-interests'],
-		  'experience': body.experience,
-		  'more-experiences': body['more-experiences']
-        }).save().then((survey) => {
-          user.description = survey;
-          user.submittedSurvey = true;
-          return user.save();
-        });
-      } else {
-        logger.info('Updated existing user in MongoDB');
-      }
-    }).then((user) => {
+      let surveyObject = {
+          country: body.country,
+          city: body.city,
+          from: body.from,
+          to: body.to,
+          level: body.level,
+          major: body.major,
+          linkedinUsername: body.linkedinUsername,
+          interests: body.interests,
+          'more-interests': body['more-interests'],
+          experience: body.experience,
+          'more-experiences': body['more-experiences']
+        };
+
+        if (!user.description) {
+          return new Survey(surveyObject).save().then(survey => {
+            user.description = survey;
+            return user.save();
+          });
+        } else {
+          logger.info('Updated existing user in MongoDB');
+          return Survey.findOneAndUpdate({ _id: user.description }, surveyObject, { upsert: true }).exec();
+          }
+      }).then((user) => {
       // Successful save
       logger.info('Successfully saved user in MongoDB');
       next() // Move to addToSlack
