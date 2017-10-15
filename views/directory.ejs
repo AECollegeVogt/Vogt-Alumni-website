@@ -1,0 +1,11 @@
+<!DOCTYPE>
+<html>
+    <% include head %>
+    <body>
+        <div>
+            <% users.forEach(function(user){ %>
+                <p> email: <%=user.email %> </p>
+              <% }); %>
+        </div>
+    </body>
+</html>

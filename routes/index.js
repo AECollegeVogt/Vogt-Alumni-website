@@ -35,9 +35,13 @@ router.get('/action', (req, res, next) => {
   });
 });
 
-router.get('/social', (req, res, next) => {
-  res.render('social', {
-    title: 'Vie Associative | Vogt Alumni'
+//This is the get request that passes the users array to the directory file
+router.get('/directory', (req, res, next) =>{
+  User.find({}).populate('description').exec().then(users => {
+    res.render('directory', {
+      title: 'Directory',
+      users: users
+    });
   });
 });
 
@@ -53,7 +57,6 @@ router.post('/join', (req, res, next) => {
       contact: body.contact,
       email: body.email
     };
-
 
 	// Search for the user email.
     // Email exists? Update
@@ -145,5 +148,7 @@ let addToSlack = (email, cb) => {
     req.write(data);
     req.end();
 };
+
+
 module.exports = router;
 
