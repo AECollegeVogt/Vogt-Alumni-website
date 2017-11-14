@@ -11,6 +11,10 @@ var config = require('./config');
 
 var app = express();
 
+//importing and register api
+var api = require('./routes/api');
+api(app) ;
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());

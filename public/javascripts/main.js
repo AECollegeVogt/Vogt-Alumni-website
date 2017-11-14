@@ -81,7 +81,6 @@ $(document).ready(function() {
 });
 
 
-
 //datepicker for date of birth
 $(function(){
 	$( "#datepicker" ).datepicker({
