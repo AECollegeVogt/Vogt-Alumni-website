@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 // Create the logging utility
-let logger = require('./logger/logger.js')();
+var logger = require('./logger/logger.js')();
 
 // Pass express data through the logger
 app.use(require('morgan')('dev', {
