@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./database');
+var cors = require('cors');
 
 var index = require('./routes/index');
 var config = require('./config');
@@ -14,6 +15,9 @@ var app = express();
 //importing and register api
 var api = require('./routes/api');
 api(app) ;
+
+//allow cors headers
+app.use(cors());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
