@@ -12,12 +12,12 @@ var config = require('./config');
 
 var app = express();
 
+//allow cors headers
+app.use(cors());
+
 //importing and register api
 var api = require('./routes/api');
 api(app) ;
-
-//allow cors headers
-app.use(cors());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -45,6 +45,11 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
+
+app.use(express.static(path.join(__dirname, 'directory')));
+app.get('/annuaire', (req, res) => {
+  res.sendFile(path.join(__dirname + '/directory/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
