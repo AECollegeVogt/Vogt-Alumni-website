@@ -5,11 +5,15 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./database');
+var cors = require('cors');
 
 var index = require('./routes/index');
 var config = require('./config');
 
 var app = express();
+
+//allow cors headers
+app.use(cors());
 
 //importing and register api
 var api = require('./routes/api');
@@ -41,6 +45,11 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
+
+app.use(express.static(path.join(__dirname, 'directory')));
+app.get('/annuaire', (req, res) => {
+  res.sendFile(path.join(__dirname + '/directory/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

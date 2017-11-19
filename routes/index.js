@@ -6,7 +6,7 @@ var User = mongoose.model('User');
 var Survey = mongoose.model('Survey');
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers/controller')
+var controller = require('../controllers/controller');
 
 var logger = require('../logger/logger.js')();
 
