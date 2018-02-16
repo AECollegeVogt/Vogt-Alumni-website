@@ -15,10 +15,6 @@ var app = express();
 //allow cors headers
 app.use(cors());
 
-//importing and register api
-var api = require('./routes/api');
-api(app) ;
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
@@ -29,6 +25,10 @@ app.use(cookieParser());
 
 // Create the logging utility
 var logger = require('./logger/logger.js')();
+
+//importing and register api
+var api = require('./routes/api');
+api(app) ;
 
 // Pass express data through the logger
 app.use(require('morgan')('dev', {
