@@ -179,7 +179,7 @@ $(function () {
         form.get(0).reset();
       }, function (res) {
         var data = JSON.parse(JSON.stringify(res.responseText));
-        
+
         var errorElement;
         if (!data.emailValid) {
           errorElement = $('label[for=email] .error');

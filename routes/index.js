@@ -60,9 +60,11 @@ router.post('/join', (req, res, next) => {
     };
 
 	// Search for the user email.
-    // Email exists? Update
-    // Email original? Create new using upsert
-    User.findOneAndUpdate({email: userObj.email}, userObj, {upsert: true, new: true}).exec().then((user) => {
+    // Email/phone exists? Update
+    // Email and phone original? Create new using upsert
+    User.findOneAndUpdate({$or:[{email: userObj.email}, {contact: userObj.contact}]}, userObj, {upsert: true, new: true}).exec()
+    .then((user) => user.save()) // Called to run validation
+    .then((user) => {
       let surveyObject = {
           country: body.country,
           city: body.city,
