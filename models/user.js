@@ -37,7 +37,7 @@ let userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     description: {
         type: Schema.ObjectId,
