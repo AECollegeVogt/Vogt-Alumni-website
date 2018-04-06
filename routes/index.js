@@ -13,9 +13,9 @@ var logger = require('../logger/logger.js')();
 mongoose.Promise = require('bluebird');
 
 let ajaxResponse = JSON.stringify({
-  'success': true,
-  'emailValid': true,
-  'errorMessage': ''
+  success: true,
+  emailValid: true,
+  errorMessage: ''
 });
 
 router.get('/', (req, res) => {
@@ -37,16 +37,21 @@ router.get('/action', (req, res, next) => {
 });
 
 //This is the get request that passes the users array to the directory file
-router.get('/directory', (req, res, next) =>{
-  User.find({}).populate('description').exec().then(users => {
-    res.render('directory', {
-      title: 'Directory',
-      users: users
+router.get('/directory', (req, res, next) => {
+  User.find({})
+    .populate('description')
+    .exec()
+    .then(users => {
+      res.render('directory', {
+        title: 'Directory',
+        users: users
+      });
     });
-  });
 });
 
-router.post('/join', (req, res, next) => {
+router.post(
+  '/join',
+  (req, res, next) => {
     let response = JSON.parse(ajaxResponse);
     let body = req.body;
     let isNewUser = false;
@@ -61,19 +66,21 @@ router.post('/join', (req, res, next) => {
     };
 
     // Search for the user by phone or email
-    User.findOne({$or:[{email: userObj.email}, {contact: userObj.contact}]}).exec()
-    .then((user) => {
-      // If no user found, create new one
-      if (!user) {
-        isNewUser = true;
+    User.findOne({ $or: [{ email: userObj.email }, { contact: userObj.contact }] })
+      .exec()
+      .then(user => {
+        // If no user found, create new one
+        if (!user) {
+          isNewUser = true;
 
-        return new User(userObj).save();
-      }
+          return new User(userObj).save();
+        }
 
-      // If user found, update data
-      return user.set(userObj).save();
-    }).then((user) => {
-      let surveyObject = {
+        // If user found, update data
+        return user.set(userObj).save();
+      })
+      .then(user => {
+        let surveyObject = {
           country: body.country,
           city: body.city,
           from: body.from,
@@ -95,26 +102,33 @@ router.post('/join', (req, res, next) => {
         } else {
           logger.info('Updated existing user in MongoDB');
           return Survey.findOneAndUpdate({ _id: user.description }, surveyObject, { upsert: true }).exec();
+        }
+      })
+      .then(
+        user => {
+          // Successful save
+          logger.info('Successfully saved user in MongoDB');
+
+          // Don't add to Slack if updating the user email
+          if (!isNewUser) {
+            res.status(200).json(response);
+            return;
           }
-      }).then((user) => {
-      // Successful save
-      logger.info('Successfully saved user in MongoDB');
 
-      // Don't add to Slack if updating the user email
-      if (!isNewUser) {
-        res.status(200).json(response);
-        return;
-      }
-
-      next(); // Move to addToSlack
-    }, (err) => {
-      // Most likely validation error
-      logger.error(`MongoDB: ${err.name}: ${err.message}`);
-      response.success = false;
-      response.errorMessage = Object.keys(err.errors).map((key) => err.errors[key].message).join(' ');
-      res.status(400).json(response);
-    });
-}, (req, res, next) => {
+          next(); // Move to addToSlack
+        },
+        err => {
+          // Most likely validation error
+          logger.error(`MongoDB: ${err.name}: ${err.message}`);
+          response.success = false;
+          response.errorMessage = Object.keys(err.errors)
+            .map(key => err.errors[key].message)
+            .join(' ');
+          res.status(400).json(response);
+        }
+      );
+  },
+  (req, res, next) => {
     // Slack actions
     let response = JSON.parse(ajaxResponse); // Get a copy
 
@@ -123,53 +137,56 @@ router.post('/join', (req, res, next) => {
       response.slackInvited = invited;
       res.status(statusCode).json(response);
     });
-});
+  }
+);
 
 let addToSlack = (email, cb) => {
-    // sends an invite to join the Vogt Alumni slack channel
-    // (error, statusCode, invited) is passed to the callback, but note that
-    // slack sends a 200 even if the user has already been invited.
-    // also note this api endpoint is "undocumented" and subject to change
-    let data = querystring.stringify({
-      email: email,
-      token: config.slack.token,
-      set_active: true
-    });
+  // sends an invite to join the Vogt Alumni slack channel
+  // (error, statusCode, invited) is passed to the callback, but note that
+  // slack sends a 200 even if the user has already been invited.
+  // also note this api endpoint is "undocumented" and subject to change
+  let data = querystring.stringify({
+    email: email,
+    token: config.slack.token,
+    set_active: true
+  });
 
-    let options = {
-      hostname: 'vogtalumni.slack.com',
-      path: '/api/users.admin.invite',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(data)
+  let options = {
+    hostname: 'vogtalumni.slack.com',
+    path: '/api/users.admin.invite',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': Buffer.byteLength(data)
+    }
+  };
+
+  let req = https.request(options, res => {
+    let body = '';
+    res.setEncoding('utf8');
+    res.on('data', d => {
+      body += d;
+    });
+    res.on('end', () => {
+      let resBody = JSON.parse(body);
+      logger.info('Slack response:', res.statusCode, resBody);
+      if (
+        res.statusCode === 200 &&
+        !resBody.ok &&
+        (resBody.error === 'already_invited' || resBody.error === 'already_in_team')
+      ) {
+        cb(null, 200, true);
+      } else {
+        cb(null, res.statusCode, false);
       }
-    };
-
-    let req = https.request(options, (res) => {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', (d) => {
-        body += d;
-      });
-      res.on('end', () => {
-        let resBody = JSON.parse(body);
-        logger.info('Slack response:', res.statusCode, resBody);
-        if (res.statusCode === 200 && !resBody.ok && (resBody.error === 'already_invited' || resBody.error === 'already_in_team')) {
-          cb(null, 200, true);
-        } else {
-          cb(null, res.statusCode, false);
-        }
-      });
     });
-    req.on('error', (err) => {
-      logger.error(`Slack request error: ${err}`);
-      cb(err, 500, false);
-    });
-    req.write(data);
-    req.end();
+  });
+  req.on('error', err => {
+    logger.error(`Slack request error: ${err}`);
+    cb(err, 500, false);
+  });
+  req.write(data);
+  req.end();
 };
 
-
 module.exports = router;
-
