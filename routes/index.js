@@ -97,6 +97,7 @@ router.post(
         if (!user.description) {
           return new Survey(surveyObject).save().then(survey => {
             user.description = survey;
+            user.submittedSurvey = true;
             return user.save();
           });
         } else {
