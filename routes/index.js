@@ -49,6 +49,7 @@ router.get('/directory', (req, res, next) =>{
 router.post('/join', (req, res, next) => {
     let response = JSON.parse(ajaxResponse);
     let body = req.body;
+    let isNewUser = false;
 
     let userObj = {
       firstName: body.firstName,
@@ -59,12 +60,19 @@ router.post('/join', (req, res, next) => {
       email: body.email
     };
 
-	// Search for the user email.
-    // Email/phone exists? Update
-    // Email and phone original? Create new using upsert
-    User.findOneAndUpdate({$or:[{email: userObj.email}, {contact: userObj.contact}]}, userObj, {upsert: true, new: true}).exec()
-    .then((user) => user.save()) // Called to run validation
+    // Search for the user by phone or email
+    User.findOne({$or:[{email: userObj.email}, {contact: userObj.contact}]}).exec()
     .then((user) => {
+      // If no user found, create new one
+      if (!user) {
+        isNewUser = true;
+
+        return new User(userObj).save();
+      }
+
+      // If user found, update data
+      return user.set(userObj).save();
+    }).then((user) => {
       let surveyObject = {
           country: body.country,
           city: body.city,
@@ -91,7 +99,14 @@ router.post('/join', (req, res, next) => {
       }).then((user) => {
       // Successful save
       logger.info('Successfully saved user in MongoDB');
-      next() // Move to addToSlack
+
+      // Don't add to Slack if updating the user email
+      if (!isNewUser) {
+        res.status(200).json(response);
+        return;
+      }
+
+      next(); // Move to addToSlack
     }, (err) => {
       // Most likely validation error
       logger.error(`MongoDB: ${err.name}: ${err.message}`);
@@ -99,18 +114,19 @@ router.post('/join', (req, res, next) => {
       response.errorMessage = Object.keys(err.errors).map((key) => err.errors[key].message).join(' ');
       res.status(400).json(response);
     });
-}, (req, res, next) => {	
+}, (req, res, next) => {
     // Slack actions
     let response = JSON.parse(ajaxResponse); // Get a copy
+
     addToSlack(req.body.email, (err, statusCode, invited) => {
       response.slackSuccess = !err && statusCode === 200;
       response.slackInvited = invited;
       res.status(statusCode).json(response);
     });
 });
- 
+
 let addToSlack = (email, cb) => {
-    // sends an invite to join the dvcoders slack channel
+    // sends an invite to join the Vogt Alumni slack channel
     // (error, statusCode, invited) is passed to the callback, but note that
     // slack sends a 200 even if the user has already been invited.
     // also note this api endpoint is "undocumented" and subject to change
