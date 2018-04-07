@@ -5,12 +5,18 @@
   	<% include nav %>
       <span class="overlay-container">
 	    <div class="overlay"></div>
-	    <div class="message-container">
+	    <div class="message-container success">
 	      <h2 id="message-title">Merci d'avoir rejoint l'association</h2>
 	      <p id="message-description">Bien vouloir accepter l'invitation qui vous a été envoyée par email pour rejoindre notre groupe Slack!</p><br>
 	      <p><a href="/"><strong>Retour vers la page d'accueil!</strong></a></p>
 	    </div>
-	  </span>	
+      <div class="message-container error">
+	      <h2 id="message-title">Ce compte existe déjà</h2>
+	      <p id="message-description">Un compte à été trouvé avec <span id="existing-info"> </span></p><br>
+        <p>Veuillez vous diriger vers l'annuaire pour modifier vos informations si besoin!</p>br>
+	      <p><a href="/annuaire"><strong>Vers l'annuaire</strong></a></p>
+	    </div>
+	  </span>
 	  <section class="u-full-width header">
 	    <h1><big><b>Rejoins</b> Vogt Alumni</big></h1>
 	    <h5>Groupe fermé pour les anciens du Collège François-Xavier Vogt. </h5>
@@ -54,7 +60,7 @@
           </div>
 	      <div class="row form-row">
 	      	<div class="eight columns offset-by-two col-md-8">
-			  <label for="contact">*Contact Telephonique</label>  
+			  <label for="contact">*Contact Telephonique</label>
 			  <input class="u-full-width" type="tel" name="contact" id="contact" data-required>
 			  <span id="valid-msg" class="hide">✓ Valid</span>
 			  <span id="error-msg" class="hide">Invalid number</span>
@@ -95,7 +101,7 @@
 	      <div class="row form-row">
 	      	<div class="eight columns offset-by-two col-md-8">
 	      	  <label>Pays de résidence</label>
-	      	  <select class="u-full-width" id="current-country" name="country"></select>	
+	      	  <select class="u-full-width" id="current-country" name="country"></select>
 	      	</div>
 	      </div>
 	      <div class="row form-row">
@@ -103,14 +109,14 @@
 	      	  <label>Ville</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="city" placeholder="Yaoundé">
-	      	  </label>	
+	      	  </label>
 	      	</div>
 	      </div>
 	      <div class="row form-row">
 	        <div class="eight columns offset-by-two col-md-8">
 	          <label>Années de passage au Collège vogt</label>
 	          <label for="from" class="radio-inline">De
-			  	<input type="text" id="from" name="from" readonly="true"> 
+			  	<input type="text" id="from" name="from" readonly="true">
 			  </label>
 			  <label for="to" class="radio-inline">a
 			  	<input type="text" id="to" name="to" readonly="true">
@@ -124,7 +130,7 @@
 	      	  <label>Niveau d'études actuel</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="level" placeholder="Licence 1">
-	      	  </label>	
+	      	  </label>
 	      	</div>
 	      </div>
 	      <div class="row form-row">
@@ -132,7 +138,7 @@
 	      	  <label>Filière d'études actuelle</label>
 	      	  <label class="u-full-width">
 	      	  	<input type="text" name="major" placeholder="comptabilité et gestion">
-	      	  </label>	
+	      	  </label>
 	      	</div>
 	      </div>
 	      <div class="row form-row">
@@ -209,7 +215,7 @@
 	</div>
 
 	<% include footer %>
-	
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </body>
 </html>

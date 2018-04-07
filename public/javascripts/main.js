@@ -7,17 +7,17 @@ $(document).ready(function() {
       $("#social").hide();
     } else {
       $("#main").hide();
-    }   
+    }
     $("#action").show();
     return false;
-  }); 
+  });
 
   $("#life").click(function(){
     if($("#action").is(":visible") == true) {
       $("#action").hide();
     } else {
       $("#main").hide();
-    }   
+    }
     $("#social").show();
     return false;
   });
@@ -202,12 +202,12 @@ $(function () {
       return;
     }
 
-    var formData = $('#form').serializeArray(); 
-    for (var i = 0; i < formData.length; i++) {  
-      if (formData[i].name === 'contact') {    
-        formData[i].value = $("#contact").intlTelInput('getNumber');    
-        break;  
-      } 
+    var formData = $('#form').serializeArray();
+    for (var i = 0; i < formData.length; i++) {
+      if (formData[i].name === 'contact') {
+        formData[i].value = $("#contact").intlTelInput('getNumber');
+        break;
+      }
     };
 
     $.ajax({
@@ -216,6 +216,7 @@ $(function () {
       data: $.param(formData)
     }).then(function (data) {
       console.log('things are happening', data);
+      $('.message-container.error').hide();
       $('.overlay-container').show();
       $('#join-button').hide();
       // To clear fields, so no annoying closing messages displayed by browser
@@ -225,10 +226,11 @@ $(function () {
 
       var errorElement;
       if (!data.isNewUser) {
-        // TODO: Show message indicating to use directory instead
-        errorElement = $('#other-error');
-        renderError(errorElement, data.errorMessage);
-        scrollToElement(errorElement);
+        $('.message-container.success').hide();
+        $('.overlay-container').show();
+        $('#join-button').hide();
+        // To clear fields, so no annoying closing messages displayed by browser
+        form.get(0).reset();
       }
       else if (!data.emailValid) {
         errorElement = $('label[for=email] .error');
