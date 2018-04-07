@@ -128,7 +128,7 @@ $( function() {
 /* globals $ */
 function scrollToElement (element) {
   $('html, body').animate({
-    scrollTop: element.offset().top
+    scrollTop: element.offset().top - $('.navbar').outerHeight() * 2
   }, 1000);
 };
 
@@ -160,7 +160,7 @@ $(function () {
   });
 
   var passwordField = $('#password');
-  var confirmField = $('#confirm-password');
+  var confirmField = $('#confirmPassword');
 
   passwordField.add(confirmField).on('input', function(e) {
     var confirmLabel = $('label[for="' + confirmField.attr('name') + '"]');
@@ -182,10 +182,10 @@ $(function () {
       if (!el.checkValidity() || el.value === '') {
         if (requiredMatched) {
           requiredMatched = false;
-          scrollToElement(form);
+          scrollToElement($(el));
         }
 
-        el.setAttribute('required', true);
+        // el.setAttribute('required', true);
 
         $('label[for="' + el.name + '"]').addClass('error');
       }
@@ -195,12 +195,10 @@ $(function () {
       return;
     }
 
-    if (passwordField.text() !== confirmField.text()) {
+    if (passwordField.val() !== confirmField.val()) {
       requiredMatched = false;
       renderError($('#other-error'), 'Les mots de passe doivent correspondre');
-    }
-
-    if (!requiredMatched) {
+      scrollToElement(passwordField);
       return;
     }
 
@@ -217,7 +215,7 @@ $(function () {
       type: form.attr('method'),
       data: $.param(formData)
     }).then(function (data) {
-      console.log('things are happening');
+      console.log('things are happening', data);
       $('.overlay-container').show();
       $('#join-button').hide();
       // To clear fields, so no annoying closing messages displayed by browser
