@@ -62,7 +62,8 @@ router.post(
       gender: body['gender'],
       dateOfBirth: body.dateOfBirth,
       contact: body.contact,
-      email: body.email
+      email: body.email,
+      password: body.password
     };
 
     // Search for the user by phone or email
