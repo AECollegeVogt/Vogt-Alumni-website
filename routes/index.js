@@ -77,12 +77,12 @@ router.post(
             .filter(function(msg) {
               return msg;
             })
-            .join(', ');
+            .join(' et ');
 
           throw {
             name: 'User already found',
             message: message,
-            errors: { user: { message: 'Déjà inscrit' } }
+            errors: { found: { message: message } }
           };
         }
 

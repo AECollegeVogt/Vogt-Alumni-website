@@ -102,6 +102,18 @@ input:invalid {
   box-shadow: 10px 10px 5px rgba(0,0,0,.2);
 }
 
+.message-container.fail {
+  background-color: #ef8409;
+}
+
+.message-container.fail a {
+  color: #0d47a1;
+}
+
+#existing-info {
+  font-weight: bold;
+}
+
 #work {
   background-color: #ffd3f1;
 }

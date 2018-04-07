@@ -216,7 +216,7 @@ $(function () {
       data: $.param(formData)
     }).then(function (data) {
       console.log('things are happening', data);
-      $('.message-container.error').hide();
+      $('.message-container.fail').hide();
       $('.overlay-container').show();
       $('#join-button').hide();
       // To clear fields, so no annoying closing messages displayed by browser
@@ -226,6 +226,7 @@ $(function () {
 
       var errorElement;
       if (!data.isNewUser) {
+        $('#existing-info').text(data.errorMessage);
         $('.message-container.success').hide();
         $('.overlay-container').show();
         $('#join-button').hide();
