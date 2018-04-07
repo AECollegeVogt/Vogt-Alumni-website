@@ -15,6 +15,7 @@ mongoose.Promise = require('bluebird');
 let ajaxResponse = JSON.stringify({
   success: true,
   emailValid: true,
+  isNewUser: true,
   errorMessage: ''
 });
 
@@ -54,7 +55,6 @@ router.post(
   (req, res, next) => {
     let response = JSON.parse(ajaxResponse);
     let body = req.body;
-    let isNewUser = false;
 
     let userObj = {
       firstName: body.firstName,
@@ -70,15 +70,32 @@ router.post(
     User.findOne({ $or: [{ email: userObj.email }, { contact: userObj.contact }] })
       .exec()
       .then(user => {
-        // If no user found, create new one
-        if (!user) {
-          isNewUser = true;
+        // If user found, send message to client
+        if (user) {
+          response.isNewUser = false;
+          let message = [userObj.email === user.email && user.email, userObj.contact === user.contact && user.contact]
+            .filter(function(msg) {
+              return msg;
+            })
+            .join(', ');
 
-          return new User(userObj).save();
+          throw {
+            name: 'User already found',
+            message: message,
+            errors: { user: { message: 'Déjà inscrit' } }
+          };
         }
 
-        // If user found, update data
-        return user.set(userObj).save();
+        // If no user found, create new one
+        // Only if passwords match
+        if (body.password !== body.confirmPassword) {
+          throw {
+            name: "Passwords don't match",
+            errors: { password: { message: 'Les mots de passe ne correspondent pas' } }
+          };
+        }
+
+        return new User(userObj).save();
       })
       .then(user => {
         let surveyObject = {
@@ -95,37 +112,27 @@ router.post(
           'more-experiences': body['more-experiences']
         };
 
-        if (!user.description) {
-          return new Survey(surveyObject).save().then(survey => {
-            user.description = survey;
-            user.submittedSurvey = true;
-            return user.save();
-          });
-        } else {
-          logger.info('Updated existing user in MongoDB');
-          return Survey.findOneAndUpdate({ _id: user.description }, surveyObject, { upsert: true }).exec();
-        }
+        return new Survey(surveyObject).save().then(survey => {
+          user.description = survey;
+          user.submittedSurvey = true;
+          return user.save();
+        });
       })
       .then(
         user => {
           // Successful save
           logger.info('Successfully saved user in MongoDB');
 
-          // Don't add to Slack if updating the user email
-          if (!isNewUser) {
-            res.status(200).json(response);
-            return;
-          }
-
           next(); // Move to addToSlack
         },
         err => {
           // Most likely validation error
-          logger.error(`MongoDB: ${err.name}: ${err.message}`);
+          logger.error(`Error: ${err.name}: ${err.message}`);
           response.success = false;
           response.errorMessage = Object.keys(err.errors)
             .map(key => err.errors[key].message)
             .join(' ');
+
           res.status(400).json(response);
         }
       );

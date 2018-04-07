@@ -197,7 +197,7 @@ $(function () {
 
     if (passwordField.val() !== confirmField.val()) {
       requiredMatched = false;
-      renderError($('#other-error'), 'Les mots de passe doivent correspondre');
+      renderError($('#other-error'), 'Les mots de passe ne correspondent pas');
       scrollToElement(passwordField);
       return;
     }
@@ -224,16 +224,22 @@ $(function () {
       var data = JSON.parse(res.responseText);
 
       var errorElement;
-      if (!data.emailValid) {
-        errorElement = $('label[for=email] .error');
+      if (!data.isNewUser) {
+        // TODO: Show message indicating to use directory instead
+        errorElement = $('#other-error');
+        renderError(errorElement, data.errorMessage);
         scrollToElement(errorElement);
+      }
+      else if (!data.emailValid) {
+        errorElement = $('label[for=email] .error');
         renderError(errorElement, ' - ' + data.errorMessage);
+        scrollToElement(errorElement);
         console.log(email);
-      } 
+      }
       else {
         errorElement = $('#other-error');
-        scrollToElement(form);
         renderError(errorElement, data.errorMessage);
+        scrollToElement(errorElement);
       }
     });
   });
