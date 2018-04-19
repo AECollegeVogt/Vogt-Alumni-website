@@ -4,7 +4,7 @@ let mongoose = require('mongoose'),
     bcrypt = require('bcrypt');
 
 exports.list_all_users = function(req, res) {
-    User.find({}, { _id: 0, password: 0 }).populate('description').exec().then(users => {
+    User.find({}, { _id: 0, password: 0 }).sort({lastName:1}).populate('description').exec().then(users => {
         res.json(users);
     });
 };
